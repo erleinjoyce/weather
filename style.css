@@ -1,0 +1,6 @@
+/*Styling*/
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+body, * {
+	font-family: 'Raleway', sans-serif;
+}

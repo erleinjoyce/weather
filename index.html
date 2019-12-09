@@ -109,7 +109,7 @@ function getDate() {
 // Get users location (region)
 $.ajax({ 
     type: 'GET', 
-    url: 'http://ip-api.com/json/', 
+    url: 'https://freegeoip.app/json/', 
     dataType: 'json',
     success: function (data) { 
         var region = data['regionName'];

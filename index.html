@@ -3,7 +3,6 @@
 <head>
 	<title>Weather Forecast</title>
 	<link rel="icon" href="ico.png">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Using bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -15,155 +14,36 @@
 </head>
 <body>
 	<div class="container my-5">
-		<h1 class="text-center mb-5 heading-title">Weather Forecast</h1>
+		<h1 class="text-center">Weather Forecast</h1>
 
-		<div class="row">
-			<div class="col-md-12">
-				<div class="today_weather">
-					<div class="card shadow rounded">
-						<div class="card-header">
-							<h2 class="h5 mb-0 d-md-inline">Today's Weather</h2>
-							<span class="float-md-right datetoday small mt-1"></span>
-						</div>
-						<div class="card-body text-center m-3">
-							<div class="row">
-								<div class="col-md-12">
-									<h3 class="locationtext"></h3>
-									<div class="temperature-container">
-										<h4 class="temperature"><span class="temperature-value"></span> &#176;C</h4>
-										<h6 class="weather-description text-uppercase"></h6>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
-		<div class="row mt-3 text-center">
-			<div class="col mb-3">
-				<div class="card shadow rounded">
-					<div class="card-header">Minimum</div>
-					<div class="card-body">
-						<p class="maxtemp mb-0"><span></span> &#176;C</p>
-					</div>
-				</div>
-			</div>
-			<div class="col mb-3">
-				<div class="card shadow rounded">
-					<div class="card-header">Maximum</div>
-					<div class="card-body">
-						<p class="mintemp mb-0"><span></span> &#176;C</p>
-					</div>
-				</div>
-			</div>
-			<div class="col mb-3">
-				<div class="card shadow rounded">
-					<div class="card-header">Humidity</div>
-					<div class="card-body">
-						<p class="humidity mb-0"><span></span>%</p>			
-					</div>
-				</div>
-			</div>
-			<div class="col mb-3">
-				<div class="card shadow rounded">
-					<div class="card-header">Sunrise</div>
-					<div class="card-body">
-						<p class="sunrise mb-0"><span></span></p>	
-					</div>
-				</div>
-			</div>
-			<div class="col mb-3">
-				<div class="card shadow rounded">
-					<div class="card-header">Sunset</div>
-					<div class="card-body">
-						<p class="sunset mb-0"><span></span></p>	
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </body>
 
 <script type="text/javascript">
-// Realtime dates updating
-getDate();
-
-window.setInterval(function(){
-	getDate();
-}, 1000);
-
-// Dispalaying date today
-function getDate() {
-	var d = new Date();
-	// Getting month name
-	const monthNames = ["January", "February", "March", "April", "May", "June",
-	  "July", "August", "September", "October", "November", "December"
-	];
-	var strDate = monthNames[(d.getMonth())] + " " + d.getDate() + ", " + d.getFullYear();
-	strDate += " " + d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-	$(".datetoday").text(strDate);
-}
-
-// Get users location (region)
 $.ajax({ 
     type: 'GET', 
     url: 'https://freegeoip.app/json/', 
     dataType: 'json',
     success: function (data) { 
-        var region = data['regionName'];
-        var country = data['country'];
+        var region = data['region_name'];
         
         switch(region) {
-        	// We need only Manila for Metro Manila because the API is not reading it
         	case 'Metro Manila' : region = 'Manila'; break;
         }
-
-        $(".locationtext").text(region + ", " + country);
-
         getWoeid(region);
     }
 });
-
 function getWoeid(region) {
-	// Call openweather API
 	$.ajax({ 
 	    type: 'GET', 
-	    url: 'https://api.openweathermap.org/data/2.5/weather?APPID=91b065765fa8db386f21fbd3d778f2a1&q=' + region + '&units=metric', 
+	    url: 'https://www.metaweather.com/api/location/search/?query=' + region, 
 	    dataType: 'json',
 	    success: function (data) { 
-	    	console.log(data)
-
-	    	// Actual weather
-	    	var weather = data['weather']['main'];
-	    	var description = data['weather'][0]['description'];
-
-	    	// More details about weather
-	        var humidity = data['main']['humidity'];
-	        var temp = data['main']['temp'];
-	        var temp_min = data['main']['temp_min'];
-	        var temp_max = data['main']['temp_max'];
-
-	        var time_calculated = new Date(data['dt']*1000);
-
-	        var sunrise = new Date(data['sys']['sunrise']*1000);
-	        var sunset = new Date(data['sys']['sunset']*1000);
-
-	        // Convert to time only
-	        sunrise = sunrise.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-	        sunset = sunset.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-
-	        $(".temperature-value").text(temp);
-	        $(".weather-description").text(description);
-
-	        $(".mintemp span").text(temp_min);
-	        $(".maxtemp span").text(temp_max);
-	        $(".humidity span").text(humidity);
-	        $(".sunrise span").text(sunrise);
-	        $(".sunset span").text(sunset);
+	        var woeid = data['woeid'];
+	        console.log(data);
 	    }
 	});
 }
 </script>
-</html>
+</html> 

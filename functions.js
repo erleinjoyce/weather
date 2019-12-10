@@ -41,7 +41,7 @@ function getWoeid(region) {
 	// Call openweather API
 	$.ajax({ 
 	    type: 'GET', 
-	    url: 'http://api.openweathermap.org/data/2.5/weather?APPID=91b065765fa8db386f21fbd3d778f2a1&q=' + region + '&units=metric', 
+	    url: 'https://api.openweathermap.org/data/2.5/weather?APPID=91b065765fa8db386f21fbd3d778f2a1&q=' + region + '&units=metric', 
 	    dataType: 'json',
 	    success: function (data) { 
 	    	console.log(data)

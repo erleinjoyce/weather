@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Forecast</title>
+	<link rel="icon" href="ico.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Using bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- Using jQuery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container my-5">
+		<h1 class="text-center mb-5 heading-title">Weather Forecast</h1>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="today_weather">
+					<div class="card shadow rounded">
+						<div class="card-header">
+							<h2 class="h5 mb-0 d-md-inline">Today's Weather</h2>
+							<span class="float-md-right datetoday small mt-1"></span>
+						</div>
+						<div class="card-body text-center m-3">
+							<div class="row">
+								<div class="col-md-12">
+									<h3 class="locationtext"></h3>
+									<div class="temperature-container">
+										<h4 class="temperature h1"><span class="temperature-value"></span> &#176;C</h4>
+										<h6 class="weather-description text-uppercase"></h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-3 text-center">
+			<div class="col mb-3">
+				<div class="card shadow rounded">
+					<div class="card-header">Minimum</div>
+					<div class="card-body">
+						<p class="maxtemp mb-0"><span></span> &#176;C</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-3">
+				<div class="card shadow rounded">
+					<div class="card-header">Maximum</div>
+					<div class="card-body">
+						<p class="mintemp mb-0"><span></span> &#176;C</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-3">
+				<div class="card shadow rounded">
+					<div class="card-header">Humidity</div>
+					<div class="card-body">
+						<p class="humidity mb-0"><span></span>%</p>			
+					</div>
+				</div>
+			</div>
+			<div class="col mb-3">
+				<div class="card shadow rounded">
+					<div class="card-header">Sunrise</div>
+					<div class="card-body">
+						<p class="sunrise mb-0"><span></span></p>	
+					</div>
+				</div>
+			</div>
+			<div class="col mb-3">
+				<div class="card shadow rounded">
+					<div class="card-header">Sunset</div>
+					<div class="card-body">
+						<p class="sunset mb-0"><span></span></p>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="functions.js"></script>
+</html>

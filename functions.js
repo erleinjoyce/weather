@@ -29,6 +29,7 @@ $.ajax({
         switch(region) {
         	// We need only Manila for Metro Manila because the API is not reading it
         	case 'Metro Manila' : region = 'Manila'; break;
+		case '' : region = country; break;
         }
 
         $(".locationtext").text(region + ", " + country);
